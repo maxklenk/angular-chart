@@ -55,6 +55,15 @@ angular.module('angularChart', [])
             }
           };
 
+          // replace the <angularchart> directive to a <div> in order to avoid issue #12
+          //
+          scope.replaceDirectiveToDiv = function() {
+            var dom = angular.element('<div/>');
+            var e = $compile(dom)(scope);
+            element.replaceWith(e); // Make changes into the DOM
+            element = e;            // Change the reference of the element for the other functions
+          };
+
           // add unique identifier for each chart
           //
           scope.addIdentifier = function () {
@@ -322,6 +331,7 @@ angular.module('angularChart', [])
 
 
           // startup
+          scope.replaceDirectiveToDiv();
           scope.addIdentifier();
           scope.updateChart();
 
