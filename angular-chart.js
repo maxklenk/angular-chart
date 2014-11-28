@@ -496,6 +496,16 @@
               scope.options.rows[options.index].show = clicked.show;
             };
 
+            // expose resize function of c3 to outside
+            //
+            if(scope.options.resize){
+              scope.options.resize = function() {
+                scope.chart.resize();
+              };
+            }else{
+              scope.options.resize = angular.noop;
+            }
+
             // generate circular options
             //
             scope.rowEdit = [];
@@ -652,19 +662,19 @@
                 return isOld;
               });
 
-            //do actual removal /adding of selections and return if something happened.
-            var didSomething = false;
-            if (addedSelections.length > 0) {
+              //do actual removal /adding of selections and return if something happened.
+              var didSomething = false;
+              if (addedSelections.length > 0) {
                 this.performSelections(addedSelections);
                 didSomething = true;
-            }
+              }
 
-            if (removedSelections.length > 0) {
+              if (removedSelections.length > 0) {
                 this.performUnselections(removedSelections);
                 didSomething = true;
-            }
+              }
 
-            return didSomething;
+              return didSomething;
             }
           };
 
