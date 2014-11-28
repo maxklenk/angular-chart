@@ -496,6 +496,16 @@
               scope.options.rows[options.index].show = clicked.show;
             };
 
+            // expose resize function of c3 to outside
+            //
+            if(scope.options.resize){
+              scope.options.resize = function() {
+                scope.chart.resize();
+              };
+            }else{
+              scope.options.resize = angular.noop;
+            }
+
             // generate circular options
             //
             scope.rowEdit = [];
@@ -640,11 +650,6 @@
                 return isNew;
               });
 
-              if (addedSelections.length > 0) {
-                this.performSelections(addedSelections);
-                return true;
-              }
-
               // removedSelections
               var removedSelections = oldSelections.filter(function (elm) {
                 var isOld = true;
@@ -656,12 +661,20 @@
                 });
                 return isOld;
               });
-              if (removedSelections.length > 0) {
-                this.performUnselections(removedSelections);
-                return true;
+
+              //do actual removal /adding of selections and return if something happened.
+              var didSomething = false;
+              if (addedSelections.length > 0) {
+                this.performSelections(addedSelections);
+                didSomething = true;
               }
 
-              return false;
+              if (removedSelections.length > 0) {
+                this.performUnselections(removedSelections);
+                didSomething = true;
+              }
+
+              return didSomething;
             }
           };
 
