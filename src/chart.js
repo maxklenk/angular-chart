@@ -28,6 +28,7 @@
           scope.chart = null;
           scope.configuration = {
             data: {
+              x: '',
               keys: {
                 value: [],
                 x: ''
@@ -114,7 +115,14 @@
                 scope.configuration.data.json = scope.dataset;
               }
             }
-
+            
+            // Configure x axis label reference data
+            //
+            if (scope.options.data.xColumnName) {
+                scope.configuration.data.x = scope.options.data.xColumnName;
+            } else {
+                scope.configuration.data.x = '';
+            }
 
             // Chart type
             //
