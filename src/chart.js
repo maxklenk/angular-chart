@@ -18,7 +18,8 @@
         scope: {
           dataset: '=',
           options: '=',
-          schema: '='
+          schema: '=',
+          regions: '='
         },
 
         link: function (scope, element, attrs) {
@@ -128,6 +129,11 @@
               }
             }
 
+            // Add regions
+            //
+            if (scope.regions){
+              scope.configuration.regions = scope.regions;
+            }
 
             // Chart type
             //
@@ -772,6 +778,15 @@
             }
           };
 
+          // watcher of changes in regions
+          //
+          scope.startRegionsWatcher = function () {
+            scope.$watch('regions', function (newValue, oldValue) {
+              scope.updateChart();
+            },
+            true);
+          };
+
           // watcher of changes in options
           //
           scope.startOptionsWatcher = function () {
@@ -865,6 +880,7 @@
           scope.updateChart();
 
           scope.selections.performSelections(scope.options.selection.selected);
+          scope.startRegionsWatcher();
           scope.startOptionsWatcher();
           scope.startDatasetWatcher();
           scope.registerDestroyListener();
