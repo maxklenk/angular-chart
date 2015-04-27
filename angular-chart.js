@@ -265,6 +265,9 @@
               if (scope.options.xAxis.displayFormat) {
                 scope.configuration.axis.x.tick.format = scope.options.xAxis.displayFormat;
               }
+              if(scope.options.xAxis.tickCount){
+                scope.configuration.axis.x.tick.count = scope.options.xAxis.tickCount;
+              }
 
               // is xAxis type specified?
               if (scope.schema && scope.schema[scope.options.xAxis.key]) {
