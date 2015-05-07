@@ -66,6 +66,7 @@
               }
             },
             tooltip: {
+              show: true,
               format: {}
             },
             legend: {
@@ -241,7 +242,7 @@
                 scope.options.xAxis.tickOptions
               );
             }
-            
+
             // xAxis Label
             //
             if (scope.options.xAxis && scope.options.xAxis.label) {
@@ -346,6 +347,9 @@
             //
             scope.configuration.tooltip.format = {};
             if (scope.options.tooltip) {
+              if(typeof scope.options.tooltip.show === 'boolean') {
+                scope.configuration.tooltip.show = scope.options.tooltip.show;
+              }
               if (scope.options.tooltip.displayFormat) {
                 scope.configuration.tooltip.format.value = scope.options.tooltip.displayFormat;
               }

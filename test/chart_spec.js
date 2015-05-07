@@ -1104,56 +1104,95 @@ describe('angularChart:', function () {
 
       describe('. tooltip', function () {
 
-        it(' - Tooltip format function should be passed to Chart', function () {
-          // check configuration before
-          expect(elementScope.configuration.tooltip.format.value).not.toBeDefined();
 
-          // set option
-          var tooltip = {
-            displayFormat: function () {
-            }
-          };
+        describe('. show', function () {
+          it('- Tooltip should be shown by default', function() {
+            expect(elementScope.configuration.tooltip.show).toBe(true);// check configuration before
 
-          $scope.options.tooltip = tooltip;
-          $scope.$apply();
+            // set option
+            $scope.$apply();
 
-          // check configuration change
-          expect(elementScope.configuration.tooltip.format.value).toBe(tooltip.displayFormat);
+            // check configuration change
+            expect(elementScope.configuration.tooltip.show).toBe(true);
+          });
+
+          it('- Tooltip visibility should be reflected to its boolean option setting.', function () {
+            // check configuration before
+            expect(elementScope.configuration.tooltip.show).toBe(true);
+
+            // set option
+            var tooltip = {
+              show: false
+            };
+            $scope.options.tooltip = tooltip;
+            $scope.$apply();
+
+            // check configuration change
+            expect(elementScope.configuration.tooltip.show).toBe(tooltip.show);
+
+            tooltip.show = true;
+            $scope.options.tooltip = tooltip;
+            $scope.$apply();
+
+            // check configuration change
+            expect(elementScope.configuration.tooltip.show).toBe(tooltip.show);
+
+          });
         });
 
-        it(' - Tooltip format function should removed when configuration changes.', function () {
-          // check configuration before
-          expect(elementScope.configuration.tooltip.format.value).not.toBeDefined();
+        describe('. displayFormat', function () {
 
-          // set option
-          var tooltip = {
-            displayFormat: function () {
-            }
-          };
-          $scope.options.tooltip = tooltip;
-          $scope.$apply();
+          it(' - Tooltip format function should be passed to Chart', function () {
+            // check configuration before
+            expect(elementScope.configuration.tooltip.format.value).not.toBeDefined();
 
-          // check configuration change
-          expect(elementScope.configuration.tooltip.format.value).toBe(tooltip.displayFormat);
+            // set option
+            var tooltip = {
+              displayFormat: function () {
+              }
+            };
 
-          // update option
-          $scope.options.tooltip = undefined;
-          $scope.$apply();
+            $scope.options.tooltip = tooltip;
+            $scope.$apply();
 
-          // check configuration change
-          expect(elementScope.configuration.tooltip.format.value).not.toBeDefined();
-        });
+            // check configuration change
+            expect(elementScope.configuration.tooltip.format.value).toBe(tooltip.displayFormat);
+          });
 
-        it('- Do not format tooltip if no displayFormat is defined.', function () {
-          // check configuration before
-          expect(elementScope.configuration.tooltip.format.value).not.toBeDefined();
+          it(' - Tooltip format function should removed when configuration changes.', function () {
+            // check configuration before
+            expect(elementScope.configuration.tooltip.format.value).not.toBeDefined();
 
-          // set option
-          $scope.options.tooltip = {};
-          $scope.$apply();
+            // set option
+            var tooltip = {
+              displayFormat: function () {
+              }
+            };
+            $scope.options.tooltip = tooltip;
+            $scope.$apply();
 
-          // check configuration change
-          expect(elementScope.configuration.tooltip.format.value).not.toBeDefined();
+            // check configuration change
+            expect(elementScope.configuration.tooltip.format.value).toBe(tooltip.displayFormat);
+
+            // update option
+            $scope.options.tooltip = undefined;
+            $scope.$apply();
+
+            // check configuration change
+            expect(elementScope.configuration.tooltip.format.value).not.toBeDefined();
+          });
+
+          it('- Do not format tooltip if no displayFormat is defined.', function () {
+            // check configuration before
+            expect(elementScope.configuration.tooltip.format.value).not.toBeDefined();
+
+            // set option
+            $scope.options.tooltip = {};
+            $scope.$apply();
+
+            // check configuration change
+            expect(elementScope.configuration.tooltip.format.value).not.toBeDefined();
+          });
         });
       });
 
