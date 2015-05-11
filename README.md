@@ -269,6 +269,9 @@ Defines the format for the numbers in the tooltip.
 e.g. tooltip.displayFormat = d3.format(".0%") to get a percentage format. 
 A reference of all d3 format functions can be found [here](https://github.com/mbostock/d3/wiki/Formatting)
 
+##### tooltip.show : boolean ([see example](http://maxklenk.github.io/angular-chart/examples.html#?category=tooltip&example=hide))
+If `true` a tooltip is displayed. Default: `true`
+
 ---
 #### legend : Object
 Defines the legend.
