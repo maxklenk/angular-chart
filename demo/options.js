@@ -248,6 +248,25 @@ var exampleCategories = {
     }
   },
 
+  'tooltip': {
+    slug: 'tooltip',
+    title: 'Tooltip',
+    examples: {
+      'hide': {
+        slug: 'hide',
+        title: 'Hide Tooltip',
+        subtitle: 'disable the tooltip',
+        description: 'Do not show the tooltip',
+        'options': {
+          rows: rows,
+          tooltip: {
+             show: false
+          }
+        }
+      }
+    }
+  }
+
 };
 
 // To be Added
