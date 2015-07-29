@@ -128,6 +128,7 @@
       // TODO regenerate chart only one or two times per second
       // TODO evaluate if it makes sense to destroy the chart first
       this.chart = c3.generate(this.configuration);
+      this.scopeReference.$emit('angular-chart-rendered');
     };
 
     /**
